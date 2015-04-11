@@ -2,4 +2,8 @@
 *metadata/
 *assetDatabase3
 *.log
-*.meta
+*/Library/*.meta
+*.userprefs
+*.sln
+*.dll
+*.dwlt
