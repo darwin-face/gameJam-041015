@@ -3,7 +3,10 @@
 *assetDatabase3
 *.log
 */Library/*.meta
+*/Library/ScritpAssemblies/
 *.userprefs
 *.sln
 *.dll
+*.dll.*
 *.dwlt
+*.csproj
