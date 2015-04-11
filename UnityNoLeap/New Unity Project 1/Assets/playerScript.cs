@@ -87,8 +87,8 @@ public class playerScript : MonoBehaviour {
 
 			//iterate through array, set each object's target to hitpoint
 			for(int i = 0; i < selectedUnits.Count; i++){
-				GameObject currentUnit = selectedUnits[i];
-				currentUnit.GetComponent<unitScript>().target = hitPoint;
+				unitScript currentUnitScript = selectedUnits[i].GetComponent<unitScript>();
+				currentUnitScript.SetNewDestination(hitPoint, false);
 			}
 		}
 	}

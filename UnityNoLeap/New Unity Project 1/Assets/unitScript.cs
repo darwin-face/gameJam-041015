@@ -31,7 +31,7 @@ public class unitScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//if reached the target, begin wandering
-		if (Mathf.Abs(Mathf.Abs(target.x) - Mathf.Abs(gameObject.transform.position.x)) < waypointThreshold) {
+		if(Vector3.Distance(transform.position, target) < waypointThreshold){
 			StartWandering();
 		}
 	}
@@ -64,12 +64,13 @@ public class unitScript : MonoBehaviour {
 	}
 
 	public void SetNewDestination(Vector3 position, bool isWanderDestination){
+		target = position;
 		if (isWanderDestination && isAllowedToWander) {
-			agent.SetDestination(position);
+			agent.SetDestination(target);
 		}
 		else {
 			StopWandering();
-			agent.SetDestination(position);
+			agent.SetDestination(target);
 		}
 	}
 
@@ -78,7 +79,7 @@ public class unitScript : MonoBehaviour {
 		wanderScript.StartWandering (transform.position);
 	}
 
-	void StopWandering(){
+	public void StopWandering(){
 		isAllowedToWander = false;
 		wanderScript.StopWandering ();
 	}
