@@ -55,12 +55,10 @@ public class unitScript : MonoBehaviour {
 		}
 	}
 
-	public void takeDamage(int damage, int team){
-		Debug.Log ("unit on team " + this.team + " took damage from a bullet on team " + team);
+	public void takeDamage(int damage){
 		health -= damage;
 		if (health <= 0) {
 			transform.parent.parent.gameObject.GetComponent<playerScript>().UnitDestroyed(this.gameObject);
-			Debug.Log( " unit on team " + team + " destroyed!");
 			Destroy (this.gameObject);
 		}
 	}
