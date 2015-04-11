@@ -6,14 +6,19 @@ public class wander : MonoBehaviour {
 	public bool isAllowedToWander = false;
 	public Vector3 center;
 	public float radius = 5.0f;
-	public float waitTime = 1.5f;
+	public float waitTimeAverage = 1.5f;
+	public float waitTimeFudgeFactor = 0.2f;
 	public Vector3 wanderWaypoint;
 
+	float minWaitTime;
+	float maxWaitTime;
 	unitScript thisUnitScript;
 	float endWaitTime = 0.0f;
 
 	// Use this for initialization
 	void Start () {
+		minWaitTime = waitTimeAverage - waitTimeFudgeFactor;
+		maxWaitTime = waitTimeAverage + waitTimeFudgeFactor;
 		thisUnitScript = GetComponent<unitScript> ();
 	}
 	
@@ -33,7 +38,10 @@ public class wander : MonoBehaviour {
 		newWaypoint.y = 0;
 		newWaypoint.z = Random.Range(center.z - radius, center.z + radius);
 		wanderWaypoint = newWaypoint;
-		endWaitTime = Time.time + waitTime;
+
+		//endWaitTime = Time.time + waitTime;
+		//slightly randomize the next waitTime
+		endWaitTime = Time.time + Random.Range (minWaitTime, maxWaitTime);
 	}
 
 	public void StartWandering(Vector3 center){

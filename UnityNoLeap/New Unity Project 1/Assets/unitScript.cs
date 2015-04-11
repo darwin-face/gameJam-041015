@@ -44,9 +44,10 @@ public class unitScript : MonoBehaviour {
 			if(collidingScript.team != this.team){
 				if(Time.time >= nextAllowedFireTime){
 					//KILL IT
-					GameObject currentBullet = (GameObject)Instantiate(bullet, transform.position, Quaternion.identity);
+					GameObject currentBullet = (GameObject)Instantiate(bullet, transform.position + Vector3.up, Quaternion.identity);
 					currentBullet.transform.LookAt(collidindGO.transform);
 					currentBullet.GetComponent<bulletScript>().team = this.team;
+					currentBullet.GetComponent<Renderer>().material = transform.GetChild(0).GetComponent<Renderer>().material;
 					//set next fire time
 					nextAllowedFireTime = Time.time + fireRate;
 				}
