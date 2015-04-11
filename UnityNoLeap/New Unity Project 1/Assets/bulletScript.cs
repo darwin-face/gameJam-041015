@@ -28,16 +28,10 @@ public class bulletScript : MonoBehaviour {
 		//if (this.team == 3) {return;}
 		GameObject collidingGO = other.gameObject;
 
-		if (this.team == 1) {
-			if(collidingGO.transform.tag.Equals("Team2")){
-				collidingGO.transform.parent.gameObject.GetComponent<unitScript>().takeDamage(damage, team);
-				Destroy(this.gameObject);
-			}
-		}
-		else {
-			if(collidingGO.transform.tag.Equals("Team1")){
-				collidingGO.transform.parent.gameObject.GetComponent<unitScript>().takeDamage(damage, team);
-				Destroy(this.gameObject);
+		if(collidingGO.transform.tag.Equals("Actor")){
+			unitScript collidingScript = collidingGO.transform.parent.gameObject.GetComponent<unitScript>();
+			if(collidingScript.team != this.team){
+				collidingScript.takeDamage(damage, team);
 			}
 		}
 	}
