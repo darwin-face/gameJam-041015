@@ -5,7 +5,7 @@ public class bulletScript : MonoBehaviour {
 
 	public int team = 3;
 	public float velocity = 3.0f;
-	float lifeTime = 30.0f;
+	float lifeTime = 10.0f;
 	float deathtime;
 	int damage = 1;
 
@@ -32,6 +32,7 @@ public class bulletScript : MonoBehaviour {
 			unitScript collidingScript = collidingGO.transform.parent.gameObject.GetComponent<unitScript>();
 			if(collidingScript.team != this.team){
 				collidingScript.takeDamage(damage, team);
+				Destroy(this.gameObject);
 			}
 		}
 	}

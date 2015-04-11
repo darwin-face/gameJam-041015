@@ -8,6 +8,8 @@ public class playerScript : MonoBehaviour {
 	public int resources = 10;
 	public string playerName = "SpaceCamel";
 	public int numOfUnits;
+	public int team = 1;
+	public Material teamColor;
 
 	public List<GameObject> playerUnits;
 	public List<GameObject> selectedUnits;
@@ -34,7 +36,17 @@ public class playerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		//initialize playerUnits
+		Transform unitsParent = this.transform.GetChild (0);
+		for (int i = 0; i < unitsParent.childCount; i++) {
+			GameObject currentUnit = unitsParent.GetChild(i).gameObject;
+			if(isHuman) playerUnits.Add(currentUnit.gameObject);
+			//set the unit's team
+			currentUnit.GetComponent<unitScript>().team = this.team;
+			//set the unit's color
+			currentUnit.transform.GetChild(0).GetComponent<Renderer>().material = teamColor;
+			numOfUnits++;
+		}
 	}
 	
 	// Update is called once per frame
@@ -97,5 +109,9 @@ public class playerScript : MonoBehaviour {
 	public void AddResources(int resourcesToAdd){
 		resources += resourcesToAdd;
 	}
-	
+
+	public void UnitDestroyed(GameObject destroyedUnit){
+		playerUnits.Remove (destroyedUnit);
+		selectedUnits.Remove (destroyedUnit);
+	}
 }

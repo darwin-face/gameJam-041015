@@ -25,7 +25,7 @@ public class unitScript : MonoBehaviour {
 		agent = GetComponent<NavMeshAgent> ();
 		wanderScript = GetComponent<wander> ();
 		//target = transform.position;
-		SetNewDestination (target, false);
+		SetNewDestination (transform.position, false);
 	}
 	
 	// Update is called once per frame
@@ -58,8 +58,9 @@ public class unitScript : MonoBehaviour {
 		Debug.Log ("unit on team " + this.team + " took damage from a bullet on team " + team);
 		health -= damage;
 		if (health <= 0) {
-			Destroy (this.gameObject);
+			transform.parent.parent.gameObject.GetComponent<playerScript>().UnitDestroyed(this.gameObject);
 			Debug.Log( " unit on team " + team + " destroyed!");
+			Destroy (this.gameObject);
 		}
 	}
 
