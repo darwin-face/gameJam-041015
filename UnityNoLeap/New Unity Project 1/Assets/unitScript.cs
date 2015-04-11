@@ -8,36 +8,35 @@ public class unitScript : MonoBehaviour {
 	public GameObject bullet;
 	public int health = 10;
 
+	bool isAllowedToWander = false;
 	float speed;
 	int attackDmg;
 	float fireRate = 2.0f;
 	float nextAllowedFireTime = 0.0f;
+	float waypointThreshold = 1.0f;
 
 	//public float threshold = 1.0f;
 
 	NavMeshAgent agent;
+	wander wanderScript;
 
 	// Use this for initialization
 	void Start () {
 		agent = GetComponent<NavMeshAgent> ();
-		target = transform.position;
+		wanderScript = GetComponent<wander> ();
+		//target = transform.position;
+		SetNewDestination (target, false);
 	}
-
 	
 	// Update is called once per frame
 	void Update () {
-		if (target != null) {
-			agent.SetDestination (target);
+		//if reached the target, begin wandering
+		if (Mathf.Abs(Mathf.Abs(target.x) - Mathf.Abs(gameObject.transform.position.x)) < waypointThreshold) {
+			StartWandering();
 		}
-
-		/* destroy demo
-		if (target.transform.position.x - gameObject.transform.position.x < threshold) {
-			Destroy(this.gameObject);
-		}*/
 	}
 
 	void OnTriggerStay(Collider other){
-		Debug.Log ("poop");
 		GameObject collidindGO = other.gameObject;
 		//error below?
 		unitScript collidingScript = collidindGO.GetComponent<unitScript> ();
@@ -62,5 +61,25 @@ public class unitScript : MonoBehaviour {
 			Destroy (this.gameObject);
 			Debug.Log( " unit on team " + team + " destroyed!");
 		}
+	}
+
+	public void SetNewDestination(Vector3 position, bool isWanderDestination){
+		if (isWanderDestination && isAllowedToWander) {
+			agent.SetDestination(position);
+		}
+		else {
+			StopWandering();
+			agent.SetDestination(position);
+		}
+	}
+
+	void StartWandering(){
+		isAllowedToWander = true;
+		wanderScript.StartWandering (transform.position);
+	}
+
+	void StopWandering(){
+		isAllowedToWander = false;
+		wanderScript.StopWandering ();
 	}
 }

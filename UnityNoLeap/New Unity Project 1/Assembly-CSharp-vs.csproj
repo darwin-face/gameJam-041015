@@ -47,8 +47,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\bulletScript.cs" />
-     <Compile Include="Assets\playerInput.cs" />
+     <Compile Include="Assets\managerScript.cs" />
+     <Compile Include="Assets\playerScript.cs" />
      <Compile Include="Assets\unitScript.cs" />
+     <Compile Include="Assets\wander.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
