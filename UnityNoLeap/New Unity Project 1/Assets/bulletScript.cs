@@ -5,21 +5,19 @@ public class bulletScript : MonoBehaviour {
 
 	public int team = 3;
 	public float velocity = 3.0f;
-	public float forceFactor;
 	float lifeTime = 10.0f;
 	float deathtime;
 	int damage = 1;
 
 	// Use this for initialization
 	void Start () {
-		GetComponent<Rigidbody> ().AddForce (transform.forward * forceFactor);
 		deathtime = Time.time + lifeTime;
 		Debug.Log (deathtime);	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//transform.Translate (Vector3.forward * Time.deltaTime * velocity);
+		transform.Translate (Vector3.forward * Time.deltaTime * velocity);
 		if (Time.time >= deathtime){
 			Destroy (this.gameObject);
 		}
