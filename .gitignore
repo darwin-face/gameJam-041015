@@ -6,5 +6,7 @@
 */Library/ScritpAssemblies/
 *.userprefs
 *.sln
+*.dll
 *.dll.*
 *.dwlt
+*.csproj
