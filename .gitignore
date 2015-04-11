@@ -1,4 +1,5 @@
-[Tt]emp/
-
-
+*[Tt]emp
+*metadata/
+*assetDatabase3
+*.log
 *.meta
