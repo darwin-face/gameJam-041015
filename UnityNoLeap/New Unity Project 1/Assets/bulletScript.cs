@@ -16,7 +16,6 @@ public class bulletScript : MonoBehaviour {
 		GetComponent<Rigidbody> ().velocity = transform.forward * velocity;
 		GetComponent<Rigidbody> ().AddForce(transform.forward * force);
 		deathtime = Time.time + lifeTime;
-		Debug.Log (deathtime);	
 	}
 	
 	// Update is called once per frame

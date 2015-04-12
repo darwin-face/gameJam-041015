@@ -11,7 +11,7 @@ public class unitScript : MonoBehaviour {
 	bool isAllowedToWander = false;
 	float speed;
 	int attackDmg;
-	float fireRate = 2.0f;
+	public float fireRate = 2.0f;
 	float nextAllowedFireTime = 0.0f;
 	float waypointThreshold = 1.0f;
 
